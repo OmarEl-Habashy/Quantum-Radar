@@ -25,6 +25,6 @@ public class Violation {
 
     @Override
     public String toString(){
-        return "- " + description + " : " + fee + " EGP";
+        return "- " + description + " : " + fee + " EGP \n";
     }
 }
