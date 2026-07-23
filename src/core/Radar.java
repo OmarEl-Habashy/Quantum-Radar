@@ -11,10 +11,19 @@ import java.util.Map;
 public class Radar {
     private List<Fine> fines = new ArrayList<>();
     private List<Rule> rules =  new ArrayList<>();
+    private String name;
+
+    public Radar(String name) {
+        this.name = name;
+    }
 
     public void addRule(Rule rule){
         rules.add(rule);
     }
+    public String getName() {
+        return name;
+    }
+
     public Fine processReading(RadarReading reading) {
         List<Violation> violations = new ArrayList<>();
         for (Rule rule : rules) {
