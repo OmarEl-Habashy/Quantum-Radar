@@ -1,4 +1,4 @@
-package Core;
+package core;
 
 
 import models.CarType;
@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class RadarReading {
     private final String plateNumber;
-    private final models.CarType carType;
-    private final java.time.LocalDate date;
+    private final CarType carType;
+    private final LocalDate date;
     private final int speed;
     private final boolean seatbeltStatus;
 
