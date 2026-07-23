@@ -1,11 +1,10 @@
 package core;
-
 import adapters.TrafficCameraAdapter;
 import models.CarType;
 import models.Fine;
 import rules.SeatbeltRule;
 import rules.SpeedRule;
-
+import rules.TruckRestrictionRule;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -32,12 +31,15 @@ public class Main {
         schoolZone.addRule(new SeatbeltRule(300));
         schoolZone.addRule(new SpeedRule(1000, 30, CarType.CAR));
         schoolZone.addRule(new SpeedRule(1000, 20, CarType.TRUCK));
+        schoolZone.addRule(new TruckRestrictionRule(800));
 
-        Fine f4 = schoolZone.processReading(new TrafficCameraAdapter("ABR-987", 45.0, 1, false, LocalDateTime.now()).toRadarReading());
+        Fine f4 = schoolZone.processReading(new TrafficCameraAdapter("ABR-987",   45.0, 1, false, LocalDateTime.now()).toRadarReading());
         Fine f5 = schoolZone.processReading(new TrafficCameraAdapter("YASS-1234", 28.0, 1, true,  LocalDateTime.now()).toRadarReading());
+        Fine f6 = schoolZone.processReading(new TrafficCameraAdapter("TRUK-001",  15.0, 3, true,  LocalDateTime.now()).toRadarReading());
 
         if (f4 != null) System.out.println(f4);
         if (f5 == null) System.out.println("YASS-1234 : No violation.\n");
+        if (f6 != null) System.out.println(f6);
 
 
         Radar cityCenter = new Radar("City Center");
@@ -46,13 +48,13 @@ public class Main {
         cityCenter.addRule(new SpeedRule(400, 50, CarType.TRUCK));
         cityCenter.addRule(new SpeedRule(400, 55, CarType.BUS));
 
-        Fine f6 = cityCenter.processReading(new TrafficCameraAdapter("OMAR-264", 75.0, 1, true,  LocalDateTime.now()).toRadarReading());
-        Fine f7 = cityCenter.processReading(new TrafficCameraAdapter("ALO-2255", 48.0, 3, true,  LocalDateTime.now()).toRadarReading());
-        Fine f8 = cityCenter.processReading(new TrafficCameraAdapter("YEPPYY123", 60.0, 2, false, LocalDateTime.now()).toRadarReading());
+        Fine f7 = cityCenter.processReading(new TrafficCameraAdapter("OMAR-264", 75.0, 1, true,  LocalDateTime.now()).toRadarReading());
+        Fine f8 = cityCenter.processReading(new TrafficCameraAdapter("ALO-2255", 48.0, 3, true,  LocalDateTime.now()).toRadarReading());
+        Fine f9 = cityCenter.processReading(new TrafficCameraAdapter("YEPPYY123", 60.0, 2, false, LocalDateTime.now()).toRadarReading());
 
-        if (f6 != null) System.out.println(f6);
-        if (f7 == null) System.out.println("ALO-2255 : No violation.\n");
-        if (f8 != null) System.out.println(f8);
+        if (f7 != null) System.out.println(f6);
+        if (f8 == null) System.out.println("ALO-2255 : No violation.\n");
+        if (f9 != null) System.out.println(f8);
 
 
         Radar[] allRadars = { highway, schoolZone, cityCenter };
@@ -61,7 +63,7 @@ public class Main {
             System.out.println(radar.getName() + " All Fines : ");
             Map<String, Integer> fines = radar.getAllFines();
             for (String plate : fines.keySet()) {
-                System.out.println(plate + " -> " + fines.get(plate) + " EGP");
+                System.out.println(plate + " : " + fines.get(plate) + " EGP");
             }
             System.out.println("\n");
             System.out.println(radar.getName() + " Violation Counts : ");
