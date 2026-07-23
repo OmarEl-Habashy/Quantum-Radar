@@ -32,7 +32,7 @@ public class TrafficCameraAdapter implements RadarReadingAdapter {
         CarType carType;
         switch (vehicleCode){
             case 1:
-                carType = CarType.PRIVATE;
+                carType = CarType.CAR;
                 break;
             case 2:
                 carType = CarType.BUS;
@@ -41,7 +41,7 @@ public class TrafficCameraAdapter implements RadarReadingAdapter {
                 carType = CarType.TRUCK;
                 break;
             default:// just fallback to private
-            carType = CarType.PRIVATE;
+            carType = CarType.CAR;
         }
         int vehicleSpeed = (int) Math.round(speedDetected);
         LocalDate date = dateTime.toLocalDate();

@@ -1,7 +1,7 @@
 package models;
 
 public enum CarType {
-    PRIVATE,
+    CAR,
     BUS,
     TRUCK
 }

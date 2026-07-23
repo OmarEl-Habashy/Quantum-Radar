@@ -10,10 +10,12 @@ import java.util.List;
 public class Fine {
     private final String plateNumber;
     private final List<Violation> violations;
+    private final CarType carType;
 
-    public Fine(String plateNumber, List<Violation> violations) {
+    public Fine(String plateNumber, List<Violation> violations, CarType carType) {
         this.plateNumber = plateNumber;
         this.violations = violations;
+        this.carType = carType;
     }
 
     public String getPlateNumber() {
@@ -36,7 +38,7 @@ public class Fine {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Traffic fine for car ").append(plateNumber).append("\n");
+        sb.append("Traffic fine for ").append(carType).append(" ").append(plateNumber).append("\n");
         sb.append("Total amount: ").append(getTotalFees()).append(" EGP\n");
         sb.append("Violations:\n");
         for (Violation x : violations) {
